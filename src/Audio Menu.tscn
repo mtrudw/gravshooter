@@ -1,0 +1,110 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Audio Menu.gd" type="Script" id=1]
+[ext_resource path="res://assets/modified/audiomenu.png" type="Texture" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/arial.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = SubResource( 1 )
+
+[node name="Audio Menu" type="Control"]
+margin_left = 0.352509
+margin_top = 0.363281
+margin_right = 350.353
+margin_bottom = 196.363
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.12373
+margin_right = -1.12372
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+margin_left = 24.7221
+margin_top = 26.2204
+margin_right = 242.722
+margin_bottom = 166.22
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer"]
+margin_right = 218.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Master"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MasterVol" type="HSlider" parent="ColorRect/VBoxContainer"]
+margin_top = 28.0
+margin_right = 218.0
+margin_bottom = 44.0
+min_value = -60.0
+max_value = 40.0
+step = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Label" parent="ColorRect/VBoxContainer"]
+margin_top = 48.0
+margin_right = 218.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicVol" type="HSlider" parent="ColorRect/VBoxContainer"]
+margin_top = 76.0
+margin_right = 218.0
+margin_bottom = 92.0
+min_value = -60.0
+max_value = 40.0
+step = 0.5
+
+[node name="Label3" type="Label" parent="ColorRect/VBoxContainer"]
+margin_top = 96.0
+margin_right = 218.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Sounds"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundVol" type="HSlider" parent="ColorRect/VBoxContainer"]
+margin_top = 124.0
+margin_right = 218.0
+margin_bottom = 140.0
+min_value = -60.0
+max_value = 40.0
+step = 0.5
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 285.053
+margin_top = 0.37458
+margin_right = 349.053
+margin_bottom = 64.3746
+texture_normal = ExtResource( 2 )
+[connection signal="value_changed" from="ColorRect/VBoxContainer/MasterVol" to="." method="_on_MasterVol_value_changed"]
+[connection signal="value_changed" from="ColorRect/VBoxContainer/MusicVol" to="." method="_on_MusicVol_value_changed"]
+[connection signal="value_changed" from="ColorRect/VBoxContainer/SoundVol" to="." method="_on_SoundVol_value_changed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

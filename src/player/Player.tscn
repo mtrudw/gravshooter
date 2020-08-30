@@ -1,0 +1,219 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://src/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/modified/Direction.png" type="Texture" id=2]
+[ext_resource path="res://src/Weapons/Weapon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/modified/players.png" type="Texture" id=5]
+[ext_resource path="res://assets/modified/guns.png" type="Texture" id=6]
+[ext_resource path="res://src/player/HealthBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/arial.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://src/GameMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/default_font.tres" type="DynamicFont" id=10]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 21.1278
+height = 15.0016
+
+[sub_resource type="DynamicFont" id=2]
+size = 26
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 38
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 33
+outline_size = 3
+outline_color = Color( 0.921569, 0.027451, 0.258824, 1 )
+font_data = ExtResource( 8 )
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 1 )
+speed = 900
+friction = 0.3
+gravity = 2400
+jump = -1000
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+vframes = 3
+hframes = 8
+frame = 20
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+light_mask = 0
+position = Vector2( 1.18919, 1.78381 )
+shape = SubResource( 1 )
+
+[node name="NameTag" type="Label" parent="."]
+margin_left = -56.4716
+margin_top = -53.5566
+margin_right = 57.5284
+margin_bottom = -32.5566
+custom_fonts/font = SubResource( 2 )
+text = "Test"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon" parent="." instance=ExtResource( 4 )]
+
+[node name="HealthBar" parent="." instance=ExtResource( 7 )]
+margin_left = -31.8972
+margin_top = -64.5335
+margin_right = 32.1028
+margin_bottom = -52.5335
+rect_scale = Vector2( 1, 0.7 )
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="PlayerCam" type="Camera2D" parent="."]
+rotating = true
+current = true
+
+[node name="HUD" type="Control" parent="PlayerCam"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PlayerCam/HUD"]
+margin_left = -489.586
+margin_top = 264.586
+margin_right = 496.414
+margin_bottom = 382.586
+color = Color( 1, 1, 1, 0.678431 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WeaponIndicator" type="Sprite" parent="PlayerCam/HUD/ColorRect"]
+position = Vector2( 46.087, 53.055 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 8
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerCam/HUD/ColorRect"]
+margin_left = 15.8727
+margin_top = 85.6546
+margin_right = 254.873
+margin_bottom = 105.655
+step = 0.001
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Direction" type="Sprite" parent="PlayerCam/HUD/ColorRect"]
+position = Vector2( 933.762, 60.816 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+hframes = 4
+frame = 2
+
+[node name="AmmoCounter" type="Label" parent="PlayerCam/HUD/ColorRect"]
+margin_left = 92.586
+margin_top = 34.414
+margin_right = 147.586
+margin_bottom = 80.414
+custom_fonts/font = SubResource( 4 )
+text = "30"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Messages" type="RichTextLabel" parent="PlayerCam/HUD"]
+margin_left = -510.0
+margin_top = -383.0
+margin_right = -197.0
+margin_bottom = -236.0
+custom_fonts/normal_font = SubResource( 3 )
+scroll_active = false
+scroll_following = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameMenu" parent="PlayerCam/HUD" instance=ExtResource( 9 )]
+visible = false
+margin_left = -511.238
+margin_top = -383.252
+margin_right = -511.238
+margin_bottom = -383.252
+
+[node name="KillLabel" type="Label" parent="PlayerCam/HUD"]
+margin_left = -213.0
+margin_top = -340.0
+margin_right = 218.0
+margin_bottom = -217.0
+custom_fonts/font = SubResource( 5 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MsgTimer" type="Timer" parent="PlayerCam/HUD"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Stats" type="Control" parent="PlayerCam/HUD"]
+visible = false
+margin_left = -410.0
+margin_top = -240.0
+margin_right = 379.0
+margin_bottom = 249.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="PlayerCam/HUD/Stats"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.137255, 0.129412, 0.129412, 0.905882 )
+
+[node name="ItemList" type="ItemList" parent="PlayerCam/HUD/Stats"]
+anchor_right = 1.0
+anchor_bottom = 0.984
+margin_right = 4.0
+margin_bottom = -0.176025
+custom_fonts/font = ExtResource( 10 )
+max_columns = 3
+same_column_width = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 128
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 2
+emission_rect_extents = Vector2( 16, 16 )
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, 200 )
+initial_velocity = 74.04
+initial_velocity_random = 0.12
+scale_amount = 2.0
+scale_amount_random = 1.0
+color = Color( 0.929412, 0.00392157, 0.00392157, 1 )
+
+[node name="ParticleStopTimer" type="Timer" parent="."]
+wait_time = 0.1
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
+[connection signal="timeout" from="PlayerCam/HUD/MsgTimer" to="." method="_on_MsgTimer_timeout"]
+[connection signal="timeout" from="ParticleStopTimer" to="." method="_on_ParticleStopTimer_timeout"]

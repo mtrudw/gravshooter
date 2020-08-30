@@ -1,0 +1,24 @@
+[gd_scene format=2]
+
+[node name="TreeParticles" type="CPUParticles2D"]
+emitting = false
+amount = 200
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.3
+direction = Vector2( 0, -1 )
+spread = 106.36
+initial_velocity = 34.6
+initial_velocity_random = 1.0
+linear_accel = 100.0
+linear_accel_random = 0.78
+angle = 458.4
+angle_random = 1.0
+scale_amount = 2.0
+scale_amount_random = 1.0
+color = Color( 0.158562, 0.664062, 0.343807, 1 )
+hue_variation = -0.06
+hue_variation_random = 0.4
+anim_speed = 27.02
+anim_speed_random = 0.17

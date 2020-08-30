@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/modified/ejectable.png" type="Texture" id=1]
+[ext_resource path="res://src/player/Ejectable.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.33553
+
+[node name="Ejectable" type="RigidBody2D"]
+collision_layer = 128
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2.78406, -0.835217 )
+shape = SubResource( 1 )
+
+[node name="lifeTime" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+[connection signal="timeout" from="lifeTime" to="." method="_on_lifeTime_timeout"]

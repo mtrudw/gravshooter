@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Audio Menu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/default_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://GameMenu.gd" type="Script" id=3]
+
+[node name="GameMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.584314, 0.576471, 0.576471, 0.560784 )
+
+[node name="Button" type="Button" parent="TextureRect"]
+margin_left = 336.856
+margin_top = 503.189
+margin_right = 754.856
+margin_bottom = 651.189
+custom_fonts/font = ExtResource( 2 )
+text = "Back to Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="TextureRect"]
+margin_left = 334.978
+margin_top = 315.378
+margin_right = 752.978
+margin_bottom = 463.378
+custom_fonts/font = ExtResource( 2 )
+text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio Menu" parent="TextureRect" instance=ExtResource( 1 )]
+margin_left = 625.762
+margin_top = 39.5628
+margin_right = 975.763
+margin_bottom = 235.563
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="TextureRect/Button2" to="." method="_on_Button2_pressed"]

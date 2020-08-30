@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Weapons/HurtBox.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 69.2515
+
+[node name="HurtBox" type="Area2D"]
+input_pickable = false
+collision_layer = 16
+collision_mask = 514
+script = ExtResource( 1 )
+
+[node name="Box" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="killTimer" type="Timer" parent="."]
+[connection signal="body_entered" from="." to="." method="_on_HurtBox_body_entered"]
+[connection signal="timeout" from="killTimer" to="." method="_on_killTimer_timeout"]
